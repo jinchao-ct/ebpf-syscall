@@ -1,0 +1,32 @@
+# eBPF 系统调用监控工具
+
+基于 eBPF 和 BCC 框架的系统调用监控工具，用于实时追踪进程的 `execve` 和 `openat` 系统调用。
+
+## 功能
+- 实时监控进程启动（execve）
+- 实时监控文件打开（openat）
+- 显示进程 PID、进程名和文件名
+
+## 技术栈
+- 内核态：C、eBPF、BCC
+- 用户态：Python
+- 核心机制：kprobe、Perf Buffer
+
+## 环境要求
+- Linux 内核 4.9+
+- BCC 工具包
+- Python 3.6+
+
+## 快速开始
+1. 安装依赖：`sudo apt install bpfcc-tools python3-bpfcc`
+2. 克隆仓库：`git clone https://gitee.com/jinchao112233/ebpf-syscall.git`
+3. 运行：`sudo python3 trace_execve.py`
+4. 另开终端触发事件：`ls` 
+
+## 输出示例
+PID: 12345  进程: cat  文件: /etc/hostname
+PID: 12346  进程: ls   文件: /usr/bin/ls
+
+## 实现原理
+使用 kprobe 将 eBPF 程序挂载到内核函数入口，当系统调用发生时，eBPF 程序捕获进程信息并存入 Perf Buffer，用户态 Python 程序通过 `perf_buffer_poll()` 读取并打印。
+
