@@ -19,7 +19,8 @@
 
 ## 快速开始
 1. 安装依赖：`sudo apt install bpfcc-tools python3-bpfcc`
-2. 克隆仓库：`git clone https://gitee.com/jinchao112233/ebpf-syscall.git`
+2. 克隆仓库：`git clone https://github.com/jinchao-ct/ebpf-syscall.git`
+             `git clone https://gitee.com/jinchao112233/ebpf-syscall.git`
 3. 运行：`sudo python3 trace_execve.py`
 4. 另开终端触发事件：`ls` 
 
